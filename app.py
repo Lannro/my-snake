@@ -5,6 +5,7 @@ from flask import Flask
 from flask import request
 
 import util.logic
+import util.printer
 
 
 app = Flask(__name__)
@@ -26,7 +27,7 @@ def handle_info():
 def handle_start():
     data = request.get_json()
 
-    print_odict(data)
+    print(data)
 
     return "ok"
 

@@ -33,5 +33,5 @@ def test():
         return_list.append("right")
     return return_list
 
-
+b = get_board()
 printer.print_board(test_board)
