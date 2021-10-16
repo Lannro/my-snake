@@ -4,30 +4,11 @@ import os
 from flask import Flask
 from flask import request
 
-import server_logic
+import util.logic
 
 
 app = Flask(__name__)
 import collections
-
-def print_odict(odict, depth=0, name=""):
-    if type(odict) == str or type(odict) == int:
-        print("{}{}".format("   " * depth, odict))
-    elif type(odict) == list or type(odict) == tuple:
-        for i in range(len(odict)):
-            if type(odict[i]) == str or type(odict[i]) == int:
-                print("{}{}[{}] = {}".format("   " * (depth), name, i, odict[i]))
-            else:
-                print("{}{}[{}]".format("   " * (depth), name, i))
-                print_odict(odict[i], depth+1)
-    elif type(odict) == collections.OrderedDict or type(odict) == dict:
-        for key in odict.keys():
-            if type(odict[key]) == list or type(odict[key]) == dict or type(odict[key]) == collections.OrderedDict:
-                print("{}{}[{}]".format("   " * depth, name, key))
-                print_odict(odict[key], depth+1)
-            else:
-                print("{}{}[{}] = {}".format("   " * depth, name, key, odict[key]))
-
 
 @app.get("/")
 def handle_info():
@@ -57,7 +38,7 @@ def handle_move():
     #print_board(data['board'])
 
     # TODO - look at the server_logic.py file to see how we decide what move to return!
-    move = server_logic.choose_move(data)
+    move = util.logic.choose_move(data)
 
     return {"move": move}
 
